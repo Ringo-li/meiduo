@@ -15,8 +15,9 @@ import os
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# print(sys.path)
-print(os.path.join(os.path.dirname(BASE_DIR), 'logs\meiduo.log'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+print(sys.path)
+# print(os.path.join(os.path.dirname(BASE_DIR), 'logs/meiduo.log'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'baot-=8^^-%ufl*5=yi&3b@b_b2e#nm1@$)im*$55_m6v4r$s8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.33.3"]
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'meiduo_mall.apps.users'
 ]
 
 MIDDLEWARE = [
@@ -189,7 +191,7 @@ LOGGING = {
         'file': { # 向文件输出日志
             'level': 'INFO', # 输出级别
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(os.path.dirname(BASE_DIR), 'logs\meiduo.log'), # 输出路径
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'logs/meiduo.log'), # 输出路径
             'maxBytes': 300 * 1024 * 1024,
             'backupCount': 10,
             'formatter': 'verbose'
