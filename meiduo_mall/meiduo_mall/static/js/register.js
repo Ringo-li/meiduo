@@ -8,17 +8,20 @@ let vm = new Vue({
     data: {
         host: host,
 
+        // v-show
         error_name: false,
         error_password: false,
         error_check_password: false,
         error_phone: false,
         error_allow: false,
         error_sms_code: false,
+        error_image_code:'',
 
+        // error-message
         error_name_message: '',
         error_phone_message: '',
         error_sms_code_message: '',
-        error_image_code:'',
+        error_image_code_message:'',
 
         sms_code_tip: '获取短信验证码',
         sending_flag: false, // 正在发送短信标志
@@ -27,6 +30,7 @@ let vm = new Vue({
         image_code_id: '',
         image_code_url: '',
 
+        // v-model
         username: '',
         password: '',
         password2: '',
@@ -34,7 +38,7 @@ let vm = new Vue({
         sms_code: '',
         allow: false,
         image_code:'',
-        error_image_code_message:''
+
     },
     mounted: function(){  // 页面加载完会被调用
 		// 向服务器获取图片验证码
@@ -100,7 +104,7 @@ let vm = new Vue({
         },
         // 检查手机号
         check_phone: function () {
-            var re = /^1[345789]\d{9}$/;
+            let re = /^1[345789]\d{9}$/;
 
             if (re.test(this.mobile)) {
                 this.error_phone = false;
