@@ -24,8 +24,20 @@ class RegisterView(View):
         if not all([username, password, password2, mobile, allow]):
             return http.HttpResponseForbidden('缺少必传参数')
         # 判断用户名是否是5-20个字符
-        if not re.match(r'^[a-zA-Z0-9]{8,20}$', username):
-            return http.HttpResponseForbidden('请输入8-20个字符的用户名')
+        if not re.match(r'^[a-zA-Z0-9]{5,20}$', username):
+            return http.HttpResponseForbidden('请输入5-20个字符的用户名')
+        # 判断密码是不是8-20位
+        if not re.match(r'[a-zA-Z0-9]{8,20}$', password):
+            return http.HttpResponseForbidden('请输入8-20个字符的密码')
+        # 判断两次密码是否一致
+        if password2 != password:
+            return http.HttpResponseForbidden('两次密码输入不一致')
+        # 判断手机号是否合法：
+        if not re.match(r'^1[3-9]\d{9}$', mobile):
+            return http.HttpResponseForbidden('请输入正确的电话号码')
+        # 判断是否勾选用户协议
+        if allow != "on":
+            return http.HttpResponseForbidden('请勾选用户协议')
 
 class LoginView(View):
     def get(self, request):
