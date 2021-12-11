@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views import View
 from django import http
 import re
+from django.db import DatabaseError
+
+from users.models import User
 
 # Create your views here.
 class RegisterView(View):
@@ -38,6 +41,13 @@ class RegisterView(View):
         # 判断是否勾选用户协议
         if allow != "on":
             return http.HttpResponseForbidden('请勾选用户协议')
+        # 保存注册数据，是注册业务的核心
+        try:
+            User.objects.create_user(username=username, password=password, mobile=mobile)
+        except DatabaseError:
+            return "告诉用户注册失败"
+        # 响应结果
+        return http.HttpResponse("注册成功，重定向到首页")
 
 class LoginView(View):
     def get(self, request):
