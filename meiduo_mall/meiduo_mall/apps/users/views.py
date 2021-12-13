@@ -7,8 +7,22 @@ from django.urls import reverse
 from django.contrib.auth import login
 
 from users.models import User
+from meiduo_mall.utils.response_code import RETCODE
 
 # Create your views here.
+class UsernameCountView(View):
+    """判断用户名是否重复"""
+
+    def get(self, request, username):
+        """
+        :param username: 用户名
+        :return: JSON
+        """
+        # 实现业务逻辑，使用username查询对应记录的条数。
+        count = User.objects.filter(username=username).count()
+        # 响应结果
+        return http.JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK', 'count': count})
+
 class RegisterView(View):
     """用户注册"""
 
