@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from django import http
 import re
 from django.db import DatabaseError
+from django.urls import reverse
 
 from users.models import User
 
@@ -47,8 +48,17 @@ class RegisterView(View):
         except DatabaseError:
             return "告诉用户注册失败"
         # 响应结果
-        return http.HttpResponse("注册成功，重定向到首页")
+        # return http.HttpResponse("注册成功，重定向到首页")
+        return redirect(reverse('contents:index'))
+
+class UserInfoCenterView(View):
+    def get(self, request):
+        return render(request, 'user_info_center.html')
 
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
+
+class LogoutView(View):
+    def get(self, request):
+        return redirect(reverse('contents:index'))
