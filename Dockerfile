@@ -1,7 +1,7 @@
 FROM harbor.example.com/library/python:3.7-slim
-MAINTAINER ringo
+LABEL auth="ringo" 
 
-WORKDIR /kae/app
+WORKDIR /data/app
 
 COPY requirements.txt .
 
