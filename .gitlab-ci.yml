@@ -34,6 +34,7 @@ variables:
   echo "========================make kube dir========================"
   [ -d ~/.kube ] || mkdir ~/.kube
   echo "========================set k8s env========================"
+  echo "$KUBE_CONFIG"
   echo "$KUBE_CONFIG" > ~/.kube/config
   if [ $NORMAL_CB -eq 1 ];then 
     if kubectl get deployments.|grep -w ${namecb}-canary &>/dev/null;then 
@@ -95,7 +96,7 @@ Example-deploy:
   stage: deploy
   image: harbor.example.com/library/kubectl:v1.19.9
   variables:
-    KUBE_CONFIG: "$KUBE_CONFIG_TEST"
+    KUBE_CONFIG: "$KUBE_CONFIG"
     IMG_URL: "${REGISTRY_URL}/${REGISTRY_NS}"
     NORMAL_CB: 1
   script:
@@ -110,7 +111,7 @@ Example-canary-deploy:
   stage: deploy
   image: harbor.example.com/library/kubectl:v1.19.9
   variables:
-    KUBE_CONFIG: "$KUBE_CONFIG_TEST"
+    KUBE_CONFIG: "$KUBE_CONFIG"
     IMG_URL: "${REGISTRY_URL}/${REGISTRY_NS}"
     CANARY_CB: 1
   script:
@@ -124,7 +125,7 @@ Example-rollback-1:
   stage: rollback
   image: harbor.example.com/library/kubectl:v1.19.9
   variables:
-    KUBE_CONFIG: "$KUBE_CONFIG_TEST"
+    KUBE_CONFIG: "$KUBE_CONFIG"
     ROLL_NUM: 1
   script:
     - *rollback_k8s
@@ -137,7 +138,7 @@ Example-rollback-2:
   stage: rollback
   image: harbor.example.com/library/kubectl:v1.19.9
   variables:
-    KUBE_CONFIG: "$KUBE_CONFIG_TEST"
+    KUBE_CONFIG: "$KUBE_CONFIG"
     ROLL_NUM: 2
   script:
     - *rollback_k8s
@@ -150,7 +151,7 @@ Example-rollback-3:
   stage: rollback
   image: harbor.example.com/library/kubectl:v1.19.9
   variables:
-    KUBE_CONFIG: "$KUBE_CONFIG_TEST"
+    KUBE_CONFIG: "$KUBE_CONFIG"
     ROLL_NUM: 3
   script:
     - *rollback_k8s
