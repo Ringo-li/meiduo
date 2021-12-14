@@ -34,8 +34,8 @@ variables:
   echo "========================make kube dir========================"
   [ -d ~/.kube ] || mkdir ~/.kube
   echo "========================set k8s env========================"
-  echo "$KUBE_CONFIG"
-  echo "$KUBE_CONFIG" > ~/.kube/config
+  cat "$KUBE_CONFIG"
+  cat "$KUBE_CONFIG" > ~/.kube/config
   if [ $NORMAL_CB -eq 1 ];then 
     if kubectl get deployments.|grep -w ${namecb}-canary &>/dev/null;then 
       echo "========================delete canary deployment========================"
