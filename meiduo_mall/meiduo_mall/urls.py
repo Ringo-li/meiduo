@@ -21,4 +21,5 @@ urlpatterns = [
     # path('/', include('users.urls', "user"), namespace='users'),
     path('', include(('users.urls', 'users'))),
     path('', include(('contents.urls', 'contents'))),
+    path('', include(('verifications.urls', 'verifications'))),
 ]
