@@ -56,8 +56,8 @@ let vm = new Vue({
 
         // 检查用户名
         check_username: function () {
-            var re = /^[a-zA-Z0-9_-]{5,20}$/;
-            var re2 = /^[0-9]+$/;
+            let re = /^[a-zA-Z0-9_-]{5,20}$/;
+            let re2 = /^[0-9]+$/;
             if (re.test(this.username) && !re2.test(this.username)) {
                 this.error_name = false;
             } else {
@@ -66,7 +66,7 @@ let vm = new Vue({
             }
             // 检查重名
             if (this.error_name == false) {
-                var url = '/usernames/' + this.username + '/count/';
+                let url = '/username/' + this.username + '/count/';
                 axios.get(url, {
                     responseType: 'json',
                     withCredentials:true,
