@@ -85,16 +85,16 @@ spec:
           timeoutSeconds: 3
           successThreshold: 1
           failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            scheme: HTTP
-            path: /
-            port: 5000
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 3
-          successThreshold: 1
-          failureThreshold: 3
+        # livenessProbe:
+        #   httpGet:
+        #     scheme: HTTP
+        #     path: /
+        #     port: 5000
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 5
+        #   timeoutSeconds: 3
+        #   successThreshold: 1
+        #   failureThreshold: 3
         resources:
           requests:
             cpu: 0.1
