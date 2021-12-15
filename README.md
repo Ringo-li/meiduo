@@ -5,12 +5,12 @@ Type           Key                      Value                    State        Ma
 Variable   DOCKER_USER                 admin                   下面都关闭   下面都关闭
 Variable   DOCKER_PASS                 Harbor12345
 Variable   REGISTRY_URL                harbor.example.com
-Variable   REGISTRY_NS                 product
+Variable   REGISTRY_NS                 meiduo
 File       KUBE_CONFIG_TEST            k8s相关config配置文件内容
 ```
 一键生成k8s相关config配置文件内容  
 ```
-bash kube_config_generate.sh flask-test https://192.168.33.62:6443
+bash kube_config_generate.sh meiduo https://192.168.33.62:6443
 cat kube_config/meiduo.kube.conf
 ```
 生成镜像拉取权限
