@@ -28,8 +28,7 @@ variables:
   sed -ri "s+replicanum+${replicanum}+g" ${namecb}-${CI_COMMIT_TAG}.yaml
   sed -ri "s+mytls+${certname}+g" ${namecb}-${CI_COMMIT_TAG}.yaml
   sed -ri "s+mytagcb+${CI_COMMIT_TAG}+g" ${namecb}-${CI_COMMIT_TAG}.yaml
-  sed -ri "s+harbor.example.com/library+${IMG_URL}+g" ${namecb}-${CI_COMMIT_TAG}.yaml
-  sed -ri "s+example-imagepull-token+${namecb}-imagepull-token+g" ${namecb}-${CI_COMMIT_TAG}.yaml
+  sed -ri "s+harbor.example.com/library+${IMG_URL}+g" ${namecb}-${CI_COMMIT_TAG}.yaml 
   cat ${namecb}-${CI_COMMIT_TAG}.yaml
   echo " "
   echo "========================make kube dir========================"

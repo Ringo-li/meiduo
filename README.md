@@ -17,3 +17,4 @@ cat kube_config/meiduo.kube.conf
 ```
 kubectl create secret docker-registry meiduo-imagepull-token -n meiduo --docker-server=harbor.example.com --docker-username=admin --docker-password=Harbor12345 --docker-email=admin@example.com
 ```
+
