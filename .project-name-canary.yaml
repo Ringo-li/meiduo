@@ -109,6 +109,19 @@ spec:
           limits:
             cpu: 0.2
             memory: 0.2Gi
+      # 标签kae: "true"的pod尽量不要调度到统一Node上配置如下
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: kae
+                      operator: In
+                      values:
+                        - true
+                topologyKey: kubernetes.io/hostname
       imagePullSecrets:
       - name: mytls-imagepull-token
       # tolerations:
