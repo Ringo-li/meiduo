@@ -1,3 +1,5 @@
-Django==2.2.5
+Django==3.0.7
 Jinja2==2.11.2
 PyMySQL==1.0.2
+django-redis==5.1.0
+redis==3.5.3

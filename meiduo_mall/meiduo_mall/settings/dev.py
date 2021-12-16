@@ -26,7 +26,7 @@ SECRET_KEY = 'baot-=8^^-%ufl*5=yi&3b@b_b2e#nm1@$)im*$55_m6v4r$s8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.33.3", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -100,7 +100,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '192.168.33.3',
+        'HOST': 'mysql.database',
         'PORT': 3306,
         'USER': 'ringo',
         'PASSWORD': '123456',
