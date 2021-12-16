@@ -104,5 +104,5 @@ spec:
             memory: 0.2Gi
       imagePullSecrets:
       - name: mytls-imagepull-token
-      tolerations:
-      - operator: Exists
+      # tolerations:
+      # - operator: Exists
