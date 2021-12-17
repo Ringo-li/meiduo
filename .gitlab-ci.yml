@@ -7,7 +7,7 @@ stages:
 variables:
   namecb: "meiduo"
   svcport: "8000"
-  replicanum: "5"
+  replicanum: "2"
   ingress: "meiduo.example.com"
   certname: "meiduo"
   CanarylIngressNum: "40"

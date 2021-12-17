@@ -70,16 +70,26 @@ spec:
       # 标签kae: "true"的pod尽量不要调度到统一Node上配置如下
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: kae
-                      operator: In
-                      values:
-                        - true
-                topologyKey: kubernetes.io/hostname
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "kae"
+                    operator: In
+                    values:
+                    - true
+              topologyKey: "kubernetes.io/hostname"
+      # affinity:
+      #   podAntiAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #       - weight: 100
+      #         podAffinityTerm:
+      #           labelSelector:
+      #             matchExpressions:
+      #               - key: kae
+      #                 operator: In
+      #                 values:
+      #                   - true
+      #           topologyKey: kubernetes.io/hostname
       containers:
       - name: projectnamecb
         image: harbor.example.com/library/projectnamecb:mytagcb
