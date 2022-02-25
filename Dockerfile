@@ -16,6 +16,6 @@ RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requ
 COPY . .
 
 EXPOSE 8000
-HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
+# HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 
 ENTRYPOINT ["python", "meiduo_mall/manage.py", "runserver", "0.0.0.0:8000"]
