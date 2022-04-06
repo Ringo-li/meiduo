@@ -49,15 +49,20 @@ variables:
   echo "============================================================="
   echo "                    Rollback Indx List"
   echo "============================================================="
-  kubectl rollout history deployment ${namecb}|tail -5|awk -F"[ =]+" '{print $1"\t"$5}'|sed '$d'|sed '$d'|sort -r|awk '{print $NF}'|awk '$0=""NR".   "$0'
+  # kubectl rollout history deployment ${namecb}|tail -5|awk -F"[ =]+" '{print $1"\t"$5}'|sed '$d'|sed '$d'|sort -r|awk '{print $NF}'|awk '$0=""NR".   "$0'
+  kubectl rollout history deployment ${namecb} | grep filename | awk -F"[= ]+" '{print $1"\t"$5}'| sort -r|awk '{print $NF}'|awk '$0=""NR"   "$0'
 
 
 .rollback_k8s: &rollback_k8s |
   [ -d ~/.kube ] || mkdir ~/.kube
   echo "$KUBE_CONFIG" > ~/.kube/config
-  last_version_command=$( kubectl rollout history deployment ${namecb}|tail -5|awk -F"[ =]+" '{print $1"\t"$5}'|sed '$d'|sed '$d'|tail -${ROLL_NUM}|head -1 )
-  last_version_num=$( echo ${last_version_command}|awk '{print $1}' )
-  last_version_name=$( echo ${last_version_command}|awk '{print $2}' )
+  # last_version_command=$( kubectl rollout history deployment ${namecb}|tail -5|awk -F"[ =]+" '{print $1"\t"$5}'|sed '$d'|sed '$d'|tail -${ROLL_NUM}|head -1 )
+  # last_version_num=$( echo ${last_version_command} |awk '{print $1}' )
+  # last_version_name=$( echo ${last_version_command}|awk '{print $2}' )
+
+  last_version_command=$( kubectl rollout history deployment ${namecb}|grep filename|awk -F"[ =]+" '{print $1"\t"$5}')
+  last_version_name=$( echo ${last_version_command} | sort -r|awk '{print $NF}'|awk '$0=""NR"   "$0' |grep "${ROLL_NUM} "|awk '{print $2}')
+  last_version_num=$( echo ${last_version_command}  | grep "${last_version_name}" | awk '{print $1}' | awk '{print $1}' )
   kubectl rollout undo deployment ${namecb} --to-revision=$last_version_num
   echo $last_version_num
   echo $last_version_name
