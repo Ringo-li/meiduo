@@ -63,9 +63,8 @@ variables:
   last_version_command=$(  kubectl rollout history deployment ${namecb} | grep filename | tail -4 |sed '$d'| awk -F"[= ]+" '{print $1"\t"$5}'  )
   last_version_name=$( echo ${last_version_command} | sort -nr|awk '{print $NF}'|awk '$0=""NR"   "$0' |grep "${ROLL_NUM} "|awk '{print $2}')
   last_version_num=$( echo ${last_version_command}  | grep "${last_version_name}" | awk '{print $1}'  )
-  kubectl rollout undo deployment ${namecb} --to-revision=$last_version_num
-  echo $last_version_num
-  echo $last_version_name
+  kubectl rollout undo deployment ${namecb} --to-revision=${last_version_num}
+  echo rollout version num: ${last_version_num},  rollout version name: ${last_version_name}
   kubectl rollout history deployment ${namecb}
 
 
