@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('version/', views.VersionView.as_view(), name='version'),
 ]
