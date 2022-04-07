@@ -82,7 +82,7 @@ build:
   before_script:
     - docker login ${REGISTRY_URL} -u "$DOCKER_USER" -p "$DOCKER_PASS"
   script:
-    - sed -ri "s+\"CI_COMMIT_TAG\"+${CI_COMMIT_TAG}+" /builds/root/meiduo/meiduo_mall/meiduo_mall/apps/contents/views.py
+    - sed -ri "s+CI_COMMIT_TAG+${CI_COMMIT_TAG}+" /builds/root/meiduo/meiduo_mall/meiduo_mall/apps/contents/views.py
     - docker pull ${REGISTRY_URL}/${REGISTRY_NS}/${namecb}:latest || true
     - docker build --network host --cache-from ${REGISTRY_URL}/${REGISTRY_NS}/${namecb}:latest --tag ${REGISTRY_URL}/${REGISTRY_NS}/${namecb}:$CI_COMMIT_TAG --tag ${REGISTRY_URL}/${REGISTRY_NS}/${namecb}:latest .
     - docker push ${REGISTRY_URL}/${REGISTRY_NS}/${namecb}:$CI_COMMIT_TAG
